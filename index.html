@@ -61,7 +61,13 @@ nav.menu a:hover{background:var(--accent-bg);color:var(--accent)}
 .product{font-size:15px;font-weight:700;color:var(--slate);margin:0 0 6px;letter-spacing:.02em}
 .product b{font-size:30px;font-weight:800;color:var(--accent);letter-spacing:-.02em;margin-right:8px}
 .meta{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--slate);font-weight:500}
-.toggle{font:inherit;font-size:14px;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer;min-height:44px}
+.toggle{display:inline-flex;align-items:center;gap:2px;padding:4px;border:1.5px solid var(--line);background:var(--surface);color:var(--slate);border-radius:999px;cursor:pointer;min-height:44px}
+.toggle svg{width:32px;height:32px;padding:6px;border-radius:50%;display:block}
+.toggle .sun{background:var(--accent);color:#fff}
+.toggle .moon{background:transparent}
+:root[data-theme="dark"] .toggle .sun{background:transparent;color:var(--slate)}
+:root[data-theme="dark"] .toggle .moon{background:var(--accent);color:#0B1424}
+.toggle:hover{border-color:var(--accent)}
 .hero{padding:34px 0 22px}
 .kicker{display:inline-block;font-size:14px;font-weight:700;color:var(--accent);background:var(--accent-bg);border-radius:6px;padding:4px 10px}
 h1{font-size:clamp(36px,5.2vw,58px);font-weight:800;line-height:1.02;letter-spacing:-.03em;margin:14px 0 12px;max-width:14ch}
@@ -136,7 +142,7 @@ footer.f p{margin:0 0 6px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script>
-(function(){try{var t=localStorage.getItem("vp-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})();
+(function(){var t=null;try{t=localStorage.getItem("vp-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light"}document.documentElement.setAttribute("data-theme",t)})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
@@ -154,7 +160,10 @@ footer.f p{margin:0 0 6px}
   </nav>
   <div class="meta">
     <span>Investor overview · 12 November 2026</span>
-    <button class="toggle" id="themeBtn" type="button">Dark mode</button>
+    <button class="toggle" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Switch between light and dark">
+      <svg class="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+    </button>
   </div>
 </header>
 
@@ -275,11 +284,11 @@ footer.f p{margin:0 0 6px}
 <script>
 (function(){
   var b=document.getElementById("themeBtn"),r=document.documentElement;
+  function sync(){var d=r.getAttribute("data-theme")==="dark";b.setAttribute("aria-checked",d?"true":"false")}
+  sync();
   b.addEventListener("click",function(){
-    var cur=r.getAttribute("data-theme");
-    if(!cur){cur=window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}
-    var next=cur==="dark"?"light":"dark";
-    r.setAttribute("data-theme",next);
+    var next=r.getAttribute("data-theme")==="dark"?"light":"dark";
+    r.setAttribute("data-theme",next);sync();
     try{localStorage.setItem("vp-theme",next)}catch(e){}
   });
 })();
