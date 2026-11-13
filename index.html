@@ -61,13 +61,7 @@ nav.menu a:hover{background:var(--accent-bg);color:var(--accent)}
 .product{font-size:15px;font-weight:700;color:var(--slate);margin:0 0 6px;letter-spacing:.02em}
 .product b{font-size:30px;font-weight:800;color:var(--accent);letter-spacing:-.02em;margin-right:8px}
 .meta{display:flex;align-items:center;gap:14px;font-size:14px;color:var(--slate);font-weight:500}
-.toggle{display:inline-flex;align-items:center;gap:2px;padding:4px;border:1.5px solid var(--line);background:var(--surface);color:var(--slate);border-radius:999px;cursor:pointer;min-height:44px}
-.toggle svg{width:32px;height:32px;padding:6px;border-radius:50%;display:block}
-.toggle .sun{background:var(--accent);color:#fff}
-.toggle .moon{background:transparent}
-:root[data-theme="dark"] .toggle .sun{background:transparent;color:var(--slate)}
-:root[data-theme="dark"] .toggle .moon{background:var(--accent);color:#0B1424}
-.toggle:hover{border-color:var(--accent)}
+.toggle{font:inherit;font-size:14px;font-weight:600;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer;min-height:44px}
 .hero{padding:34px 0 22px}
 .kicker{display:inline-block;font-size:14px;font-weight:700;color:var(--accent);background:var(--accent-bg);border-radius:6px;padding:4px 10px}
 h1{font-size:clamp(36px,5.2vw,58px);font-weight:800;line-height:1.02;letter-spacing:-.03em;margin:14px 0 12px;max-width:14ch}
@@ -81,7 +75,6 @@ section{padding:22px 0 4px}
 h2.title{font-size:clamp(24px,3vw,32px);font-weight:800;letter-spacing:-.02em;margin:0 0 10px;max-width:24ch;line-height:1.1}
 p{margin:0 0 10px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.two.three{grid-template-columns:repeat(3,1fr);gap:14px}
 .card{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:16px 18px}
 .card h3{font-size:19px;font-weight:700;margin:0 0 6px}
 ul.tight{margin:0;padding-left:18px}
@@ -135,17 +128,15 @@ ul.tight li{margin:0 0 6px}
 .split small{display:block;color:var(--slate);font-size:13px}
 .team{display:grid;grid-template-columns:1fr;gap:8px}
 .team div{font-size:14.5px}
-.team b a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
-.team b a:hover{color:var(--accent)}
 .team b{font-size:15px}
 footer.f{margin-top:22px;padding-top:14px;border-top:1.5px solid var(--line);font-size:12.5px;color:var(--slate);line-height:1.45}
 footer.f p{margin:0 0 6px}
 @media (max-width:960px){.scale{grid-template-columns:repeat(2,1fr)}.apps{grid-template-columns:repeat(2,1fr)}.raise{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:860px){.two.three{grid-template-columns:1fr}.two,.stages,.team,.jobs{grid-template-columns:1fr}}
+@media (max-width:860px){.two,.stages,.team,.jobs{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script>
-(function(){var t=null;try{t=localStorage.getItem("vp-theme")}catch(e){}if(t!=="dark"&&t!=="light"){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches)?"dark":"light"}document.documentElement.setAttribute("data-theme",t)})();
+(function(){try{var t=localStorage.getItem("vp-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 </head>
@@ -163,10 +154,7 @@ footer.f p{margin:0 0 6px}
   </nav>
   <div class="meta">
     <span>Investor overview · 12 November 2026</span>
-    <button class="toggle" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Switch between light and dark">
-      <svg class="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
-      <svg class="moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
-    </button>
+    <button class="toggle" id="themeBtn" type="button">Dark mode</button>
   </div>
 </header>
 
@@ -215,7 +203,7 @@ footer.f p{margin:0 0 6px}
   <div class="apps">
     <div class="app live"><b>VeriPura <span class="f">FOOD</span><sup class="tm">™</sup></b><span class="tag live">Live</span></div>
     <div class="app res"><b>Cosmetics</b><span class="tag done">Research completed</span></div>
-    <div class="app res"><b>Fashion</b><span class="tag wip">Research underway</span></div>
+    <div class="app res"><b>Apparel</b><span class="tag wip">Research underway</span></div>
     <div class="app ex"><b>Supplements</b><span class="tag ex">Planned</span></div>
     <div class="app ex"><b>Pharma</b><span class="tag ex">Planned</span></div>
   </div>
@@ -231,7 +219,7 @@ footer.f p{margin:0 0 6px}
     <div class="stat"><b>20,000 to 50,000</b><span>3. Importers of food, cosmetics, supplements and pharma, assuming 5% to 12% of active importers.</span><em>VeriPura estimate</em></div>
     <div class="stat"><b>18M+</b><span>4. One volume signal: FDA prior notices a year for food shipments into the US.</span><em>FDA</em></div>
   </div>
-  <div class="two three" style="margin-top:14px">
+  <div class="two" style="margin-top:14px">
     <div class="card">
       <h3>Embedded route: scale</h3>
       <p style="margin:0">CORE sits inside forwarder, TMS and customs platforms and serves every importer on them. We are in discussion with one UK freight forwarder today.</p>
@@ -239,10 +227,6 @@ footer.f p{margin:0 0 6px}
     <div class="card">
       <h3>Direct route: base</h3>
       <p style="margin:0">Importers with their own development teams call the hosted API. Teams without one use an industry solution such as FOOD.</p>
-    </div>
-    <div class="card">
-      <h3>Solution developers</h3>
-      <p style="margin:0">Developers of industry solutions can also build on CORE through the hosted API.</p>
     </div>
   </div>
   <p style="margin-top:10px">Revenue model: a monthly subscription plus transaction fees on each consignment checked.</p>
@@ -274,9 +258,9 @@ footer.f p{margin:0 0 6px}
       <p class="note">Funded to date by friends and family and paid projects with early customers.</p>
     </div>
     <div class="card team">
-      <div><b><a href="https://www.linkedin.com/in/onnostienen/" target="_blank" rel="noopener noreferrer" aria-label="Onno Stienen on LinkedIn">Onno Stienen</a>, CEO and co-founder.</b> 18+ years in import and export compliance across Southeast Asia and Europe.</div>
-      <div><b><a href="https://www.linkedin.com/in/thomassoberlin/" target="_blank" rel="noopener noreferrer" aria-label="Thomas Oberlin on LinkedIn">Thomas Oberlin</a>, COO and co-founder.</b> Serial entrepreneur and patent holder, B2B go-to-market.</div>
-      <div><b><a href="https://www.linkedin.com/in/johnwotherspoon/" target="_blank" rel="noopener noreferrer" aria-label="John Wotherspoon on LinkedIn">John Wotherspoon</a>, CTO (fractional).</b> 35+ years in enterprise architecture, including SAP, and a decade in blockchain.</div>
+      <div><b>Onno Stienen, CEO and co-founder.</b> 18+ years in import and export compliance across Southeast Asia and Europe.</div>
+      <div><b>Thomas Oberlin, COO and co-founder.</b> Serial entrepreneur and patent holder, B2B go-to-market.</div>
+      <div><b>John Wotherspoon, CTO (fractional).</b> 35+ years in enterprise architecture, including SAP, and a decade in blockchain.</div>
       <div><b>Hiring:</b> a sales lead for importers and freight forwarders, once initial trials show conversion.</div>
     </div>
   </div>
@@ -291,11 +275,11 @@ footer.f p{margin:0 0 6px}
 <script>
 (function(){
   var b=document.getElementById("themeBtn"),r=document.documentElement;
-  function sync(){var d=r.getAttribute("data-theme")==="dark";b.setAttribute("aria-checked",d?"true":"false")}
-  sync();
   b.addEventListener("click",function(){
-    var next=r.getAttribute("data-theme")==="dark"?"light":"dark";
-    r.setAttribute("data-theme",next);sync();
+    var cur=r.getAttribute("data-theme");
+    if(!cur){cur=window.matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"}
+    var next=cur==="dark"?"light":"dark";
+    r.setAttribute("data-theme",next);
     try{localStorage.setItem("vp-theme",next)}catch(e){}
   });
 })();
